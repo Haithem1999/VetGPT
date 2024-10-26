@@ -13,6 +13,72 @@ api_key = st.secrets["OPENAI_API_KEY"]
 
 client = OpenAI(api_key= api_key)
 
+# Initialize session state for chat history
+if 'messages' not in st.session_state:
+    st.session_state.messages = []
+
+# Function to generate response
+def generate_response(prompt):
+    response = client.chat.completions.create(
+        model="gpt-4-mini",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            *st.session_state.messages,
+            {"role": "user", "content": prompt},
+        ],
+    )
+    return response.choices[0].message.content
+
+# Load previous conversations from a file
+def load_conversations():
+    try:
+        with open('conversations.json', 'r') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return {}
+
+# Save conversations to a file
+def save_conversations(conversations):
+    with open('conversations.json', 'w') as f:
+        json.dump(conversations, f)
+
+# Load previous conversations
+conversations = load_conversations()
+
+# Create a unique session ID for the current user
+if 'session_id' not in st.session_state:
+    st.session_state.session_id = str(uuid.uuid4())
+
+# Load previous messages for this session, if any
+if st.session_state.session_id in conversations:
+    st.session_state.messages = conversations[st.session_state.session_id]
+
+# Display chat history
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+# Chat input
+if prompt := st.chat_input("You:"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+    
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = generate_response(prompt)
+        message_placeholder.markdown(full_response)
+    
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
+    
+    # Save the updated conversation
+    conversations[st.session_state.session_id] = st.session_state.messages
+    save_conversations(conversations)
+
+print(api_key)
+
+client = OpenAI(api_key= api_key)
+
 # Define the system prompt
 system_prompt = """a highly intelligent and specialized virtual assistant designed to help pet owners better understand their pet’s health and well-being. Your primary function is to provide accurate, reliable, and timely information regarding a variety of pet-related health issues, including symptoms, causes, preventive care, home remedies, and when to seek veterinary assistance.
 
@@ -50,6 +116,6 @@ if user_input:
     )
 
     # Display the response
-    st.write("Assistant:", response.choices[0].message.content)
+    st.write("VetBot:", response.choices[0].message.content)
 
 # End Generation Here
