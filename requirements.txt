@@ -1,2 +1,3 @@
 streamlit==1.39.0
 openai==1.52.2
+uuid==1.30
