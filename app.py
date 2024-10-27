@@ -21,6 +21,7 @@ client = OpenAI(api_key= api_key)
 st.title("Veterinarian Chatbot")
 st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
 
+
 # Define the system prompt
 system_prompt = """a highly intelligent and specialized virtual assistant designed to help pet owners better understand their pet’s health and well-being. Your primary function is to provide accurate, reliable, and timely information regarding a variety of pet-related health issues, including symptoms, causes, preventive care, home remedies, and when to seek veterinary assistance.
 
@@ -42,6 +43,36 @@ You will conduct the communication in the French language mainly but if the user
 # Initialize session state for chat history
 if 'messages' not in st.session_state:
     st.session_state.messages = []
+
+# ------------------------------------
+# Add file uploader for medical documents
+uploaded_file = st.file_uploader("Upload medical document", type=["txt", "pdf", "docx"])
+
+if uploaded_file is not None:
+    # Process the uploaded file
+    file_contents = uploaded_file.read()
+    
+    # Add the file contents to the conversation context
+    st.session_state.document_context = f"Document content: {file_contents.decode('utf-8')}"
+    
+    # Generate a response based on the uploaded document
+    document_response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": f"A medical document has been uploaded. Here's the content: {st.session_state.document_context}. Please acknowledge receipt of this document."}
+        ],
+    )
+    
+    # Display the acknowledgment
+    st.markdown("Document uploaded successfully. You can now ask questions about it.")
+    
+    # Add the acknowledgment to the conversation history
+    st.session_state.messages.append({"role": "assistant", "content": document_response.choices[0].message.content})
+
+    # Include document context in the conversation if available
+    context_messages = [{"role": "system", "content": st.session_state.get('document_context', '')}] if 'document_context' in st.session_state else []
+# -----------------------------------------------
 
 # Function to generate response
 def generate_response(prompt):
