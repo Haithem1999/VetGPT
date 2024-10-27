@@ -16,12 +16,6 @@ api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key= api_key)
 
 
-
-# Streamlit app
-st.title("Veterinarian Chatbot")
-st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
-
-
 # Define the system prompt
 system_prompt = """a highly intelligent and specialized virtual assistant designed to help pet owners better understand their pet’s health and well-being. Your primary function is to provide accurate, reliable, and timely information regarding a variety of pet-related health issues, including symptoms, causes, preventive care, home remedies, and when to seek veterinary assistance.
 
@@ -40,23 +34,21 @@ You will interact in a calm, knowledgeable, and supportive tone, ensuring users 
 You will conduct the communication in the French language mainly but if the user prefers English, you will switch to English.
 """
 
-
 # Initialize session state for chat history
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-
-# # Function to generate response
-# def generate_response(prompt):
-#     response = client.chat.completions.create(
-#         model="gpt-4o-mini",
-#         messages=[
-#             {"role": "system", "content": system_prompt},
-#             *st.session_state.messages,
-#             {"role": "user", "content": prompt},
-#         ],
-#     )
-#     return response.choices[0].message.content
+# Function to generate response
+def generate_response(prompt):
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": system_prompt},
+            *st.session_state.messages,
+            {"role": "user", "content": prompt},
+        ],
+    )
+    return response.choices[0].message.content
 
 # Load previous conversations from a file
 def load_conversations():
@@ -104,6 +96,14 @@ if prompt := st.chat_input("You:"):
     conversations[st.session_state.session_id] = st.session_state.messages
     save_conversations(conversations)
 
+print(api_key)
+
+client = OpenAI(api_key= api_key)
+
+
+# Streamlit app
+st.title("Veterinarian Chatbot")
+st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
 
 # # User input
 # user_input = st.text_input("You:", "")
