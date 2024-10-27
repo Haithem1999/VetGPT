@@ -44,48 +44,6 @@ You will conduct the communication in the French language mainly but if the user
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# -------------------------------------------
-# Function to generate response
-
-def generate_response(prompt):
-    # Initialize document content in session state if not present
-    if 'document_content' not in st.session_state:
-        st.session_state.document_content = ""
-
-    # Add file uploader for medical documents
-    uploaded_file = st.file_uploader("Upload medical document", type=["txt", "pdf"])
-    
-    if uploaded_file is not None:
-        # Process the uploaded file
-        if uploaded_file.type == "application/pdf":
-            # For PDF files, you'll need to install and import PyPDF2
-            import PyPDF2
-            pdf_reader = PyPDF2.PdfReader(uploaded_file)
-            st.session_state.document_content = ""
-            for page in pdf_reader.pages:
-                st.session_state.document_content += page.extract_text()
-        else:
-            st.session_state.document_content = uploaded_file.getvalue().decode("utf-8")
-        
-        st.success("Document uploaded successfully. You can now ask questions about it.")
-
-    # Generate response for the user's prompt
-    if prompt:
-        # Prepare the messages including the document content
-        messages = [
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Here's a medical document: {st.session_state.document_content}\n\nPlease answer the following question based on this document: {prompt}"}
-        ]
-
-        response = client.chat.completions.create(
-            model="gpt-4-mini",
-            messages=messages,
-        )
-    return response.choices[0].message.content
-
-
-#--------------------------------------------
-
 
 # # Function to generate response
 # def generate_response(prompt):
