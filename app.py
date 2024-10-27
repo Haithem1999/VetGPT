@@ -16,6 +16,11 @@ api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key= api_key)
 
 
+
+# Streamlit app
+st.title("Veterinarian Chatbot")
+st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
+
 # Define the system prompt
 system_prompt = """a highly intelligent and specialized virtual assistant designed to help pet owners better understand their pet’s health and well-being. Your primary function is to provide accurate, reliable, and timely information regarding a variety of pet-related health issues, including symptoms, causes, preventive care, home remedies, and when to seek veterinary assistance.
 
@@ -96,14 +101,6 @@ if prompt := st.chat_input("You:"):
     conversations[st.session_state.session_id] = st.session_state.messages
     save_conversations(conversations)
 
-print(api_key)
-
-client = OpenAI(api_key= api_key)
-
-
-# Streamlit app
-st.title("Veterinarian Chatbot")
-st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
 
 # # User input
 # user_input = st.text_input("You:", "")
