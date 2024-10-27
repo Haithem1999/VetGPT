@@ -53,7 +53,7 @@ if uploaded_file is not None:
     file_contents = uploaded_file.read()
     
     # Add the file contents to the conversation context
-    st.session_state.document_context = f"Document content: {file_contents.decode('utf-8')}"
+    st.session_state.document_context = f"Document content: {file_contents}"
     
     # Generate a response based on the uploaded document
     document_response = client.chat.completions.create(
