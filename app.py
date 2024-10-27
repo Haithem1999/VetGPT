@@ -39,6 +39,92 @@ You will interact in a calm, knowledgeable, and supportive tone, ensuring users 
 You will conduct the communication in the French language mainly but if the user prefers English, you will switch to English.
 """
 
+
+
+# -------------------------------------------------------
+# Initialize session state for document context and conversation persistence
+if 'document_context' not in st.session_state:
+    st.session_state.document_context = ""
+
+# File paths for persistent storage
+CONVERSATIONS_FILE = "conversations.json"
+DOCUMENTS_FILE = "uploaded_documents.json"
+
+def save_conversation(messages, document_context):
+    """Save conversation history and document context to file"""
+    conversation_data = {
+        'messages': messages,
+        'document_context': document_context,
+        'timestamp': str(uuid.uuid4())
+    }
+    try:
+        if os.path.exists(CONVERSATIONS_FILE):
+            with open(CONVERSATIONS_FILE, 'r') as f:
+                conversations = json.load(f)
+        else:
+            conversations = []
+        conversations.append(conversation_data)
+        with open(CONVERSATIONS_FILE, 'w') as f:
+            json.dump(conversations, f)
+    except Exception as e:
+        st.error(f"Error saving conversation: {str(e)}")
+
+def load_previous_conversations():
+    """Load previous conversations from file"""
+    try:
+        if os.path.exists(CONVERSATIONS_FILE):
+            with open(CONVERSATIONS_FILE, 'r') as f:
+                return json.load(f)
+        return []
+    except Exception as e:
+        st.error(f"Error loading conversations: {str(e)}")
+        return []
+
+# Function to process uploaded document
+def process_document(file):
+    if file.type == "application/pdf":
+        # Process PDF file
+        return file.getvalue().decode('utf-8', errors='ignore')
+    elif file.type == "text/plain":
+        # Process text file
+        return file.getvalue().decode('utf-8')
+    else:
+        return file.getvalue().decode('utf-8', errors='ignore')
+
+# Load previous conversations on startup
+previous_conversations = load_previous_conversations()
+if previous_conversations and 'messages' not in st.session_state:
+    # Load the most recent conversation
+    last_conversation = previous_conversations[-1]
+    st.session_state.messages = last_conversation['messages']
+    st.session_state.document_context = last_conversation['document_context']
+
+# Add file uploader for medical documents
+uploaded_file = st.file_uploader("Upload pet medical document", type=["txt", "pdf"])
+
+if uploaded_file is not None:
+    # Process the uploaded file
+    document_content = process_document(uploaded_file)
+    
+    # Update the document context in session state
+    st.session_state.document_context = f"Pet medical document content: {document_content}"
+    
+    # Save document context with current conversation
+    save_conversation(st.session_state.messages, st.session_state.document_context)
+    
+    # Acknowledge the upload
+    st.success("Document uploaded successfully. You can now ask questions about it.")
+
+
+
+
+
+
+
+# ---------------------------------------------------------
+
+
+
 # Initialize session state for chat history
 if 'messages' not in st.session_state:
     st.session_state.messages = []
