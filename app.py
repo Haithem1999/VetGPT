@@ -4,6 +4,7 @@ from openai import OpenAI
 #from dotenv import load_dotenv
 import uuid 
 import json
+from PyPDF2 import PdfReader
     
 #load_dotenv()
 
@@ -27,7 +28,7 @@ system_prompt = """a highly intelligent and specialized virtual assistant design
 You are knowledgeable in the care of a wide range of pets, including dogs, cats, small mammals, and other common household pets. When pet owners come to you with symptoms or questions about their pet’s behavior, health, or habits, you ask targeted questions to clarify the issue and offer helpful insights based on known conditions and remedies. You always advise users to seek a licensed veterinarian for a formal diagnosis and treatment plan if the condition seems serious.
 
 Your responses are concise, empathetic, and practical, ensuring pet owners feel supported and informed. You can help with common concerns such as digestive issues (like diarrhea or constipation), urinary problems, infections, injuries, dietary needs, and behavioral concerns, and you can also suggest preventive care and lifestyle adjustments to improve a pet’s overall health. Additionally, you help pet owners understand treatments, medications, and home care, making sure they know the next steps to take for their pets’ well-being.
-
+You will also be able to analyze animal medical documents provided by the user and answers questions about them. Use the provided document context to give accurate, relevant information while maintaining medical accuracy.
 Key Capabilities:
 
 Health Issue Analysis: Provide insights on potential causes based on symptoms for common pets.
@@ -42,82 +43,26 @@ You will conduct the communication in the French language mainly but if the user
 
 
 # -------------------------------------------------------
-# Initialize session state for document context and conversation persistence
-if 'document_context' not in st.session_state:
-    st.session_state.document_context = ""
 
-# File paths for persistent storage
-CONVERSATIONS_FILE = "conversations.json"
-DOCUMENTS_FILE = "uploaded_documents.json"
+# Store uploaded documents in session state
+if 'documents' not in st.session_state:
+    st.session_state.documents = {}
 
-def save_conversation(messages, document_context):
-    """Save conversation history and document context to file"""
-    conversation_data = {
-        'messages': messages,
-        'document_context': document_context,
-        'timestamp': str(uuid.uuid4())
-    }
-    try:
-        if os.path.exists(CONVERSATIONS_FILE):
-            with open(CONVERSATIONS_FILE, 'r') as f:
-                conversations = json.load(f)
-        else:
-            conversations = []
-        conversations.append(conversation_data)
-        with open(CONVERSATIONS_FILE, 'w') as f:
-            json.dump(conversations, f)
-    except Exception as e:
-        st.error(f"Error saving conversation: {str(e)}")
-
-def load_previous_conversations():
-    """Load previous conversations from file"""
-    try:
-        if os.path.exists(CONVERSATIONS_FILE):
-            with open(CONVERSATIONS_FILE, 'r') as f:
-                return json.load(f)
-        return []
-    except Exception as e:
-        st.error(f"Error loading conversations: {str(e)}")
-        return []
-
-# Function to process uploaded document
-def process_document(file):
-    if file.type == "application/pdf":
-        # Process PDF file
-        return file.getvalue().decode('utf-8', errors='ignore')
-    elif file.type == "text/plain":
-        # Process text file
-        return file.getvalue().decode('utf-8')
+# File uploader for medical documents
+uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'pdf'])
+if uploaded_file:
+    # Read and store document content
+    if uploaded_file.type == "application/pdf":
+        pdf_reader = PdfReader(uploaded_file)
+        document_content = ""
+        for page in pdf_reader.pages:
+            document_content += page.extract_text()
     else:
-        return file.getvalue().decode('utf-8', errors='ignore')
-
-# Load previous conversations on startup
-previous_conversations = load_previous_conversations()
-if previous_conversations and 'messages' not in st.session_state:
-    # Load the most recent conversation
-    last_conversation = previous_conversations[-1]
-    st.session_state.messages = last_conversation['messages']
-    st.session_state.document_context = last_conversation['document_context']
-
-# Add file uploader for medical documents
-uploaded_file = st.file_uploader("Upload pet medical document", type=["txt", "pdf"])
-
-if uploaded_file is not None:
-    # Process the uploaded file
-    document_content = process_document(uploaded_file)
+        document_content = uploaded_file.read().decode()
     
-    # Update the document context in session state
-    st.session_state.document_context = f"Pet medical document content: {document_content}"
-    
-    # Save document context with current conversation
-    save_conversation(st.session_state.messages, st.session_state.document_context)
-    
-    # Acknowledge the upload
-    st.success("Document uploaded successfully. You can now ask questions about it.")
-
-
-
-
+    # Store document in session state with filename as key
+    st.session_state.documents[uploaded_file.name] = document_content
+    st.success(f"Document {uploaded_file.name} uploaded successfully!")
 
 
 
