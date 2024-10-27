@@ -40,6 +40,44 @@ You will interact in a calm, knowledgeable, and supportive tone, ensuring users 
 You will conduct the communication in the French language mainly but if the user prefers English, you will switch to English.
 """
 
+# -------------------------------------------------------------------------
+
+# Initialize session state for document context
+if 'document_context' not in st.session_state:
+    st.session_state.document_context = ""
+
+# Function to process uploaded document
+def process_document(file):
+    if file.type == "application/pdf":
+        # Process PDF file
+        # For simplicity, we'll just read the raw bytes
+        return file.getvalue().decode('utf-8', errors='ignore')
+    elif file.type == "text/plain":
+        # Process text file
+        return file.getvalue().decode('utf-8')
+    else:
+        # For other file types, you may need to implement specific processing
+        return file.getvalue().decode('utf-8', errors='ignore')
+
+# Add file uploader for medical documents
+uploaded_file = st.file_uploader("Upload pet medical document", type=["txt", "pdf"])
+
+if uploaded_file is not None:
+    # Process the uploaded file
+    document_content = process_document(uploaded_file)
+    
+    # Update the document context in session state
+    st.session_state.document_context = f"Pet medical document content: {document_content}"
+    
+    # Acknowledge the upload
+    st.success("Document uploaded successfully. You can now ask questions about it.")
+
+
+
+# ---------------------------------------------------------------------------
+
+
+
 # Initialize session state for chat history
 if 'messages' not in st.session_state:
     st.session_state.messages = []
