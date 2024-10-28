@@ -46,6 +46,7 @@ if uploaded_file:
     st.session_state.documents[uploaded_file.name] = document_content
     st.session_state.current_context = document_content
     st.success(f"Document {uploaded_file.name} uploaded successfully!")
+    st.write(document_content)
 
 
 # ---------------------------------------------------------
