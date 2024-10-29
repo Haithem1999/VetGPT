@@ -46,16 +46,21 @@ if uploaded_file and st.session_state.show_content:
     if uploaded_file.type == "application/pdf":
         pdf_reader = PdfReader(uploaded_file)
         text = "".join([page.extract_text() for page in pdf_reader.pages])
+        # Update the document context in session state
+        st.session_state.current_context = text  # Store the parsed text for chatbot use
     elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
         doc = Document(uploaded_file)
         text = "\n".join([para.text for para in doc.paragraphs])
+        # Update the document context in session state
+        st.session_state.current_context = text  # Store the parsed text for chatbot use
     elif uploaded_file.type == "text/plain":
         text = uploaded_file.read().decode("utf-8")
+        # Update the document context in session state
+        st.session_state.current_context = text  # Store the parsed text for chatbot use
     else:
         text = "Unsupported file format."
         
-    # Update the document context in session state
-    st.session_state.current_context = text  # Store the parsed text for chatbot use
+
 
     # Display file content
     st.write(text)
