@@ -31,7 +31,16 @@ if 'documents' not in st.session_state:
 
 # File uploader for medical documents
 uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'pdf'])
-if uploaded_file:
+
+# Initialize the toggle state in session state
+if "show_content" not in st.session_state:
+    st.session_state.show_content = False
+
+# Toggle button
+if st.button("Display/Hide Document"):
+    st.session_state.show_content = not st.session_state.show_content
+
+if uploaded_file and st.session_state.show_content:
     # Read and store document content
     if uploaded_file.type == "application/pdf":
         pdf_reader = PdfReader(uploaded_file)
