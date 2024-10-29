@@ -121,7 +121,7 @@ for message in st.session_state.messages:
 # Chat input
 if prompt := st.chat_input("You:"):
     # Combine user input with document content
-    combined_input = f"{prompt}\n\nDocument Content:\n{document_content}
+    combined_input = f"{prompt}\n\nDocument Content:\n{document_content}"
     st.session_state.messages.append({"role": "user", "content": combined_input})
     with st.chat_message("user"):
         st.markdown(prompt)
