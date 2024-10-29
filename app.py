@@ -87,7 +87,7 @@ You will conduct the communication in the French language mainly but if the user
 if 'messages' not in st.session_state:
     st.session_state.messages = []
 
-# Function to generate response
+# Function to generate response with document context
 def generate_response(prompt):
     prompt_with_context = system_prompt.format(st.session_state.current_context)
     response = client.chat.completions.create(
@@ -99,6 +99,7 @@ def generate_response(prompt):
         ],
     )
     return response.choices[0].message.content
+
 
 # Load previous conversations from a file
 def load_conversations():
