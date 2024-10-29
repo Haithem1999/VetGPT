@@ -4,3 +4,4 @@ uuid==1.30
 pyPDF2==3.0.1
 fitz==0.0.1.dev2
 frontend==0.0.3
+docx==0.2.4
