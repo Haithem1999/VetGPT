@@ -59,33 +59,6 @@ if uploaded_file and st.session_state.show_content:
 
 
 
-
-
-
-
-
-# # File uploader for medical documents
-# uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'pdf'])
-
-
-
-# if uploaded_file:
-#     # Read and store document content
-#     if uploaded_file.type == "application/pdf":
-#         pdf_reader = PdfReader(uploaded_file)
-#         document_content = ""
-#         for page in pdf_reader.pages:
-#             document_content += page.extract_text()
-#     else:
-#         document_content = uploaded_file.read().decode()
-    
-#     # Store document in session state with filename as key
-#     st.session_state.documents[uploaded_file.name] = document_content
-#     st.session_state.current_context = document_content
-#     st.success(f"Document {uploaded_file.name} uploaded successfully!")
-    
-
-
 # ---------------------------------------------------------
 
 # Define the system prompt
@@ -116,10 +89,11 @@ if 'messages' not in st.session_state:
 
 # Function to generate response
 def generate_response(prompt):
+    prompt_with_context = system_prompt.format(st.session_state.current_context)
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
-            {"role": "system", "content": system_prompt},
+            {"role": "system", "content": prompt_with_context},
             *st.session_state.messages,
             {"role": "user", "content": prompt},
         ],
