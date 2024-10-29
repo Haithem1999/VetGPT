@@ -36,9 +36,6 @@ uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'p
 if "show_content" not in st.session_state:
     st.session_state.show_content = False
 
-# Toggle button
-if st.button("Display/Hide Document"):
-    st.session_state.show_content = not st.session_state.show_content
 
 if uploaded_file and st.session_state.show_content:
     # Read and store document content
@@ -54,6 +51,10 @@ if uploaded_file and st.session_state.show_content:
     st.session_state.documents[uploaded_file.name] = document_content
     st.session_state.current_context = document_content
     st.success(f"Document {uploaded_file.name} uploaded successfully!")
+    
+    # Toggle button
+    if st.button("Display/Hide Document"):
+        st.session_state.show_content = not st.session_state.show_content
     
 
 
