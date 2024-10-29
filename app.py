@@ -29,32 +29,60 @@ if 'documents' not in st.session_state:
     st.session_state.documents = {}
     st.session_state.current_context = ""
 
-# File uploader for medical documents
-uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'pdf'])
 
-# Initialize the toggle state in session state
+# File upload
+uploaded_file = st.file_uploader("Upload a file", type=["pdf", "docx", "txt"])
+
+# Initialize toggle state in session state
 if "show_content" not in st.session_state:
     st.session_state.show_content = False
 
+# Toggle button to display or hide content
+if st.button("Show/Hide File Content"):
+    st.session_state.show_content = not st.session_state.show_content
 
+# Display content if toggled on
 if uploaded_file and st.session_state.show_content:
-    # Read and store document content
     if uploaded_file.type == "application/pdf":
         pdf_reader = PdfReader(uploaded_file)
-        document_content = ""
-        for page in pdf_reader.pages:
-            document_content += page.extract_text()
+        text = "".join([page.extract_text() for page in pdf_reader.pages])
+    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+        doc = Document(uploaded_file)
+        text = "\n".join([para.text for para in doc.paragraphs])
+    elif uploaded_file.type == "text/plain":
+        text = uploaded_file.read().decode("utf-8")
     else:
-        document_content = uploaded_file.read().decode()
+        text = "Unsupported file format."
+
+    # Display file content
+    st.write(text)
+
+
+
+
+
+
+
+
+# # File uploader for medical documents
+# uploaded_file = st.file_uploader("Upload pet medical documents", type=['txt', 'pdf'])
+
+
+
+# if uploaded_file:
+#     # Read and store document content
+#     if uploaded_file.type == "application/pdf":
+#         pdf_reader = PdfReader(uploaded_file)
+#         document_content = ""
+#         for page in pdf_reader.pages:
+#             document_content += page.extract_text()
+#     else:
+#         document_content = uploaded_file.read().decode()
     
-    # Store document in session state with filename as key
-    st.session_state.documents[uploaded_file.name] = document_content
-    st.session_state.current_context = document_content
-    st.success(f"Document {uploaded_file.name} uploaded successfully!")
-    
-    # Toggle button
-    if st.button("Display/Hide Document"):
-        st.session_state.show_content = not st.session_state.show_content
+#     # Store document in session state with filename as key
+#     st.session_state.documents[uploaded_file.name] = document_content
+#     st.session_state.current_context = document_content
+#     st.success(f"Document {uploaded_file.name} uploaded successfully!")
     
 
 
