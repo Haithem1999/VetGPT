@@ -55,8 +55,6 @@ if uploaded_file and st.session_state.show_content:
     st.session_state.current_context = document_content
     st.success(f"Document {uploaded_file.name} uploaded successfully!")
     
-    if st.button('Display Document'): 
-        st.write(document_content)
 
 
 # ---------------------------------------------------------
