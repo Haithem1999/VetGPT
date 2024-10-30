@@ -6,7 +6,7 @@ import pandas as pd
 st.set_page_config(page_title="Veterinarian Expert Chatbot", layout="wide")
 
 # Set up OpenAI API (replace YOUR_API_KEY with your actual OpenAI API key)
-api_key = st.secrets["OPENAI_API_KEY"]
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Initialize session state to store conversation and uploaded file data
 if "messages" not in st.session_state:
