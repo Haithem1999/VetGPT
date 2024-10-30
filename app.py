@@ -62,7 +62,8 @@ if "show_content" not in st.session_state:
 if st.button("Show/Hide File Content"):
     st.session_state.show_content = not st.session_state.show_content
 
-    # Display file content
+# Display or hide content based on the toggle state
+if st.session_state.show_content:
     st.write(text)
 
 # ---------------------------------------------------------
