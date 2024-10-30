@@ -1,12 +1,13 @@
 import streamlit as st
-import openai  # OpenAI API for LLM
+from openai import OpenAI
 import pandas as pd
 
 # Streamlit page setup
 st.set_page_config(page_title="Veterinarian Expert Chatbot", layout="wide")
 
 # Set up OpenAI API (replace YOUR_API_KEY with your actual OpenAI API key)
-openai.api_key = st.secrets["OPENAI_API_KEY"]
+api_key = st.secrets["OPENAI_API_KEY"]
+client = OpenAI(api_key= api_key)
 
 # Initialize session state to store conversation and uploaded file data
 if "messages" not in st.session_state:
@@ -19,7 +20,7 @@ st.write("Ask questions about animal symptoms, treatments, and more. You can als
 
 # Define the function to generate a response using the LLM
 def generate_response(question):
-    response = openai.chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=st.session_state["messages"] + [{"role": "user", "content": question}]
     )
