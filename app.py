@@ -63,9 +63,9 @@ if st.button("Show/Hide File Content"):
     st.session_state.show_content = not st.session_state.show_content
 
 # Display or hide content based on the toggle state
-if st.session_state.show_content:
+if upploaded_file and st.session_state.show_content:
     st.write(text)
-else: 
+else:
     pass
 
 # ---------------------------------------------------------
