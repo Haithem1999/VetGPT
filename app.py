@@ -33,14 +33,6 @@ if 'documents' not in st.session_state:
 # File upload
 uploaded_file = st.file_uploader("Upload a file", type=["pdf", "docx", "txt"])
 
-# Initialize toggle state in session state
-if "show_content" not in st.session_state:
-    st.session_state.show_content = False
-
-# Toggle button to display or hide content
-if st.button("Show/Hide File Content"):
-    st.session_state.show_content = not st.session_state.show_content
-
 # Display content if toggled on
 if uploaded_file:
     if uploaded_file.type == "application/pdf":
@@ -59,13 +51,19 @@ if uploaded_file:
         st.session_state.current_context = text  # Store the parsed text for chatbot use
     else:
         text = "Unsupported file format."
-        
+    
 
+
+# Initialize toggle state in session state
+if "show_content" not in st.session_state:
+    st.session_state.show_content = False
+
+# Toggle button to display or hide content
+if st.button("Show/Hide File Content"):
+    st.session_state.show_content = not st.session_state.show_content
 
     # Display file content
     st.write(text)
-
-
 
 # ---------------------------------------------------------
 
