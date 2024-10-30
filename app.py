@@ -1,11 +1,18 @@
 import streamlit as st
 import os
-from openai import OpenAI
+from openai import OpenAI, OpenAIEmbeddings
 #from dotenv import load_dotenv
 import uuid 
 import json
 from PyPDF2 import PdfReader
-    
+import langchain
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.embeddings import OpenAIEmbeddings
+from langchain.vectorstores import FAISS
+from docx import Document
+import pickle4 as pickle
+
+
 
 # Set up the OpenAI API key
 # OPENAI API KEY
@@ -14,6 +21,80 @@ from PyPDF2 import PdfReader
 api_key = st.secrets["OPENAI_API_KEY"]
 
 client = OpenAI(api_key= api_key)
+
+
+# Initialize text splitter
+text_splitter = RecursiveCharacterTextSplitter(
+    chunk_size=1000,
+    chunk_overlap=200,
+    length_function=len
+)
+
+# Initialize embeddings
+embeddings = OpenAIEmbeddings(openai_api_key=api_key)
+
+# Load and process veterinary data
+def load_veterinary_knowledge_base():
+    # try:
+    #     # Try to load existing vectorstore
+    #     if os.path.exists("vectorstore.pkl"):
+    #         with open("vectorstore.pkl", "rb") as f:
+    #             return pickle.load(f)
+    # except:
+    #     pass
+        
+    # If no existing vectorstore, create new one
+    try:
+        with open("veterinary_data.txt", "r", encoding='utf-8') as f:
+            vet_data = f.read()
+            
+        # Split text into chunks
+        chunks = text_splitter.split_text(vet_data)
+        
+        # Create vector store
+        vectorstore = FAISS.from_texts(chunks, embeddings)
+        
+        # Save vectorstore
+        with open("vectorstore.pkl", "wb") as f:
+            pickle.dump(vectorstore, f)
+            
+        return vectorstore
+    except Exception as e:
+        st.error(f"Error loading veterinary knowledge base: {str(e)}")
+        return None
+
+# Function to retrieve relevant context
+def get_relevant_context(query, vectorstore, k=3):
+    if vectorstore is None:
+        return ""
+        
+    # Search for relevant chunks
+    relevant_chunks = vectorstore.similarity_search(query, k=k)
+    
+    # Combine relevant chunks into context
+    context = "\n\n".join([chunk.page_content for chunk in relevant_chunks])
+    
+    return context
+
+# Initialize vectorstore in session state
+if 'vectorstore' not in st.session_state:
+    st.session_state.vectorstore = load_veterinary_knowledge_base()
+
+# Process any additionally uploaded documents
+# File upload
+uploaded_file = st.file_uploader("Upload a file", type=["pdf", "docx", "txt"])
+if uploaded_file and st.session_state.current_context:
+    # Create new vectorstore for uploaded content
+    chunks = text_splitter.split_text(st.session_state.current_context)
+    new_vectorstore = FAISS.from_texts(chunks, embeddings)
+    
+    # Merge with existing vectorstore if it exists
+    if st.session_state.vectorstore:
+        st.session_state.vectorstore.merge_from(new_vectorstore)
+    else:
+        st.session_state.vectorstore = new_vectorstore
+        
+    st.success("Document processed and merged with knowledge base!")
 
 
 
@@ -105,8 +186,7 @@ def generate_response(prompt):
         user_prompt = prompt
 
     response = client.chat.completions.create(
-        #model="gpt-4o-mini",
-        model="ft:gpt-4o-mini-2024-07-18:personal::AHqTudjt",
+        model="gpt-4o-mini",
         messages=[{"role": "system", "content": system_prompt}] + st.session_state.messages + [{"role": "user", "content": user_prompt}],
     )
     return response.choices[0].message.content
