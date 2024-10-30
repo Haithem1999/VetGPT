@@ -25,8 +25,13 @@ st.markdown(
     """
     <style>
     .stApp {
-        background-image: url("https://img.freepik.com/free-photo/cute-pets-collage_23-2150007429.jpg");
+        background-image: linear-gradient(
+            rgba(255, 255, 255, 0.1),
+            rgba(255, 255, 255, 0.1)
+        ),
+        url("https://img.freepik.com/free-photo/cute-pets-collage_23-2150007429.jpg");
         background-size: cover;
+        background-attachment: fixed;
     }
     </style>
     """,
