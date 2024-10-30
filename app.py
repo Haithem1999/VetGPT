@@ -1,176 +1,76 @@
 import streamlit as st
-import os
-from openai import OpenAI
-#from dotenv import load_dotenv
-import uuid 
-import json
-from PyPDF2 import PdfReader
-    
+import openai  # OpenAI API for LLM
+import pandas as pd
 
-# Set up the OpenAI API key
-# OPENAI API KEY
+# Streamlit page setup
+st.set_page_config(page_title="Veterinarian Expert Chatbot", layout="wide")
 
-#api_key = os.getenv("OPENAI_API_KEY")
-api_key = st.secrets["OPENAI_API_KEY"]
+# Set up OpenAI API (replace YOUR_API_KEY with your actual OpenAI API key)
+openai.api_key = "YOUR_API_KEY"
 
-client = OpenAI(api_key= api_key)
+# Initialize session state to store conversation and uploaded file data
+if "messages" not in st.session_state:
+    st.session_state["messages"] = []
+if "file_data" not in st.session_state:
+    st.session_state["file_data"] = None
 
+st.title("Veterinarian Expert Chatbot")
+st.write("Ask questions about animal symptoms, treatments, and more. You can also upload a medical file for analysis.")
 
-
-# Streamlit app
-st.title("Veterinarian Chatbot")
-st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
-
-
-# -------------------------------------------------------
-
-# Store uploaded documents in session state
-if 'documents' not in st.session_state:
-    st.session_state.documents = {}
-    st.session_state.current_context = ""
-
-
-# File upload
-uploaded_file = st.file_uploader("Upload a file", type=["pdf", "docx", "txt"])
-
-# Initialize toggle state in session state
-if "show_content" not in st.session_state:
-    st.session_state.show_content = False
-
-# Toggle button to display or hide content
-if st.button("Show/Hide File Content"):
-    st.session_state.show_content = not st.session_state.show_content
-
-# Display content if toggled on
-if uploaded_file and st.session_state.show_content:
-    if uploaded_file.type == "application/pdf":
-        pdf_reader = PdfReader(uploaded_file)
-        text = "".join([page.extract_text() for page in pdf_reader.pages])
-        # Update the document context in session state
-        st.session_state.current_context = text  # Store the parsed text for chatbot use
-    elif uploaded_file.type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-        doc = Document(uploaded_file)
-        text = "\n".join([para.text for para in doc.paragraphs])
-        # Update the document context in session state
-        st.session_state.current_context = text  # Store the parsed text for chatbot use
-    elif uploaded_file.type == "text/plain":
-        text = uploaded_file.read().decode("utf-8")
-        # Update the document context in session state
-        st.session_state.current_context = text  # Store the parsed text for chatbot use
-    else:
-        text = "Unsupported file format."
-        
-
-
-    # Display file content
-    st.write(text)
-
-
-
-# ---------------------------------------------------------
-
-
-
-
-# Initialize session state for chat history
-if 'messages' not in st.session_state:
-    st.session_state.messages = []
-
-# Function to generate response
-def generate_response(prompt):
-    
-    # Define the system prompt
-    system_prompt = """ You are a highly intelligent and specialized virtual assistant designed to help pet owners better understand their pet’s health and well-being. Your primary function is to provide accurate, reliable, and timely information regarding a variety of pet-related health issues, including symptoms, causes, preventive care, home remedies, and when to seek veterinary assistance.
-    
-    You are knowledgeable in the care of a wide range of pets, including dogs, cats, small mammals, and other common household pets. When pet owners come to you with symptoms or questions about their pet’s behavior, health, or habits, you ask targeted questions to clarify the issue and offer helpful insights based on known conditions and remedies. You always advise users to seek a licensed veterinarian for a formal diagnosis and treatment plan if the condition seems serious.
-    You will also read and analyze uploaded documents from the user and then answer any questions relevant to that document. Here is the medical document content to reference: {st.session_state.current_context}
-
-    Your responses are concise, empathetic, and practical, ensuring pet owners feel supported and informed. You can help with common concerns such as digestive issues (like diarrhea or constipation), urinary problems, infections, injuries, dietary needs, and behavioral concerns, and you can also suggest preventive care and lifestyle adjustments to improve a pet’s overall health. Additionally, you help pet owners understand treatments, medications, and home care, making sure they know the next steps to take for their pets’ well-being.
-    
-    Key Capabilities:
-    
-    Health Issue Analysis: Provide insights on potential causes based on symptoms for common pets.
-    Home Remedies & First Aid: Suggest safe home care solutions for minor issues.
-    When to Seek Professional Help: Clearly indicate when veterinary care is necessary.
-    Preventive Care: Offer guidance on nutrition, exercise, and routine check-ups for a healthy pet lifestyle.
-    Behavioral Support: Address common behavioral issues and suggest training or management techniques.
-    You will interact in a calm, knowledgeable, and supportive tone, ensuring users feel confident in the guidance you provide while always emphasizing the importance of professional veterinary care for proper diagnosis and treatment.
-    You will conduct the communication in the French language mainly but if the user prefers English, you will switch to English.
-    """
-
-    response = client.chat.completions.create(
+# Define the function to generate a response using the LLM
+def generate_response(question):
+    response = openai.chat.completions.create(
         model="gpt-4o-mini",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            *st.session_state.messages,
-            {"role": "user", "content": prompt},
-        ],
+        messages=st.session_state["messages"] + [{"role": "user", "content": question}]
     )
     return response.choices[0].message.content
 
-# Load previous conversations from a file
-def load_conversations():
-    try:
-        with open('conversations.json', 'r') as f:
-            return json.load(f)
-    except FileNotFoundError:
-        return {}
+# Function to handle file analysis and summarize data
+def summarize_data(file_data):
+    # Summarize the data into key insights (customize this based on your needs)
+    summary = "\n".join([f"{k}: {str(v)[:50]}..." for entry in file_data for k, v in entry.items()])
+    return summary
 
-# Save conversations to a file
-def save_conversations(conversations):
-    with open('conversations.json', 'w') as f:
-        json.dump(conversations, f)
+def analyze_and_respond(question):
+    if st.session_state["file_data"]:
+        # Format file data into a readable format for the model
+        file_summary = summarize_data(st.session_state["file_data"])
+        prompt = f"File content: {file_summary}\nUser Question: {question}"
+    else:
+        prompt = question
 
-# Load previous conversations
-conversations = load_conversations()
+    return generate_response(prompt)
 
-# Create a unique session ID for the current user
-if 'session_id' not in st.session_state:
-    st.session_state.session_id = str(uuid.uuid4())
+# Handle file upload and display
+uploaded_file = st.file_uploader("Upload a medical file (CSV, Excel, or JSON)", type=["csv", "xlsx", "json"])
 
-# Load previous messages for this session, if any
-if st.session_state.session_id in conversations:
-    st.session_state.messages = conversations[st.session_state.session_id]
-
-# Display chat history
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
-# Chat input
-if prompt := st.chat_input("You:"):
-    st.session_state.messages.append({"role": "user", "content": prompt})
-    with st.chat_message("user"):
-        st.markdown(prompt)
+if uploaded_file:
+    if uploaded_file.name.endswith(".csv"):
+        data = pd.read_csv(uploaded_file)
+    elif uploaded_file.name.endswith(".xlsx"):
+        data = pd.read_excel(uploaded_file)
+    elif uploaded_file.name.endswith(".json"):
+        data = pd.read_json(uploaded_file)
     
-    with st.chat_message("assistant"):
-        message_placeholder = st.empty()
-        full_response = generate_response(prompt)
-        message_placeholder.markdown(full_response)
+    st.write("Uploaded file preview:")
+    st.dataframe(data.head())
     
-    st.session_state.messages.append({"role": "assistant", "content": full_response})
+    # Store the data in session state for later use
+    st.session_state["file_data"] = data.to_dict(orient="records")
+
+# Chat input and response display
+user_input = st.text_input("Your question:", key="input")
+if user_input:
+    # Store user message
+    st.session_state["messages"].append({"role": "user", "content": user_input})
     
-    # Save the updated conversation
-    conversations[st.session_state.session_id] = st.session_state.messages
-    save_conversations(conversations)
-
-
-# # User input
-# user_input = st.text_input("You:", "")
-
-# if user_input:
-#     # Generate response from OpenAI
-#     response = client.chat.completions.create(
-#         model="gpt-4o-mini",
-#         messages=[
-#             {"role": "system", "content": system_prompt},
-#             {"role": "user", "content": user_input},
-#         ],
-
-#     )
-
-#     # Display the response
-#     st.write("VetBot:", response.choices[0].message.content)
-
-# End Generation Here
-
+    # Generate response
+    response = analyze_and_respond(user_input)
+    st.session_state["messages"].append({"role": "assistant", "content": response})
+    
+    # Display conversation
+    for message in st.session_state["messages"]:
+        if message["role"] == "user":
+            st.write(f"**You:** {message['content']}")
+        else:
+            st.write(f"**Bot:** {message['content']}")
