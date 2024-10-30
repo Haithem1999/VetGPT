@@ -21,22 +21,22 @@ client = OpenAI(api_key= api_key)
 st.title("Veterinarian Chatbot")
 st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
 
-st.markdown(
-    """
-    <style>
-    .stApp {
-        background-image: linear-gradient(
-            rgba(255, 255, 255, 0.1),
-            rgba(255, 255, 255, 0.1)
-        ),
-        url("https://img.freepik.com/free-photo/cute-pets-collage_23-2150007429.jpg");
-        background-size: cover;
-        background-attachment: fixed;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# st.markdown(
+#     """
+#     <style>
+#     .stApp {
+#         background-image: linear-gradient(
+#             rgba(255, 255, 255, 0.1),
+#             rgba(255, 255, 255, 0.1)
+#         ),
+#         url("https://img.freepik.com/free-photo/cute-pets-collage_23-2150007429.jpg");
+#         background-size: cover;
+#         background-attachment: fixed;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
 
 # -------------------------------------------------------
