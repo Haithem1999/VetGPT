@@ -1,0 +1,447 @@
+
+    Patient ID: 4-2-151952711737-8827671-13021-202756088752994.
+    
+    This is a summary of the medical record for a CN 
+    named Schnauzer. 
+    The patient is a F and is currently 15 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-151952711737-8827671-13021-202756088752994
+    - Owner Link ID (lien_ID_P): 4-2-095463188272-6758698-06134-026137919334449
+    - Medical Conception ID: 4-2-117530285076-2754839-14335-099882319854469.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: Not Provided.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: NON, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: Not Provided.
+    - Weight: 18 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: CONSULTATION, Motif: CONSULTATION - ACCIDENT.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Accident.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: OUI, 
+      Provider: SMARTPAW.
+    - Living Conditions: Not Provided.
+    - Owner Information: 
+      - Location: Not Provided, Not Provided, Postal Code: Not Provided.
+      - Title: Not Provided.
+      - Owner ID: Not Provided.
+      - Date of Record Creation: Not Provided.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: Not Provided.
+    
+#################################################################
+
+
+    Patient ID: 4-2-151952711737-8827671-13021-202756088752994.
+    
+    This is a summary of the medical record for a CN 
+    named Schnauzer. 
+    The patient is a F and is currently 15 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-151952711737-8827671-13021-202756088752994
+    - Owner Link ID (lien_ID_P): 4-2-095463188272-6758698-06134-026137919334449
+    - Medical Conception ID: 4-2-128153173581-2348355-08783-228314034244438.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: Not Provided.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: NON, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: Not Provided.
+    - Weight: 18 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: ORDONNANCE, Motif: ORDONNANCE.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Not Provided.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: OUI, 
+      Provider: SMARTPAW.
+    - Living Conditions: Not Provided.
+    - Owner Information: 
+      - Location: Not Provided, Not Provided, Postal Code: Not Provided.
+      - Title: Not Provided.
+      - Owner ID: Not Provided.
+      - Date of Record Creation: Not Provided.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: Not Provided.
+    
+#################################################################
+
+
+    Patient ID: 4-2-054853909007-9049502-15788-255304678146016.
+    
+    This is a summary of the medical record for a CT 
+    named EUROPEEN. 
+    The patient is a M and is currently 7 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-054853909007-9049502-15788-255304678146016
+    - Owner Link ID (lien_ID_P): 4-2-060159297512-7243655-15584-023816870473275
+    - Medical Conception ID: 4-2-070299098950-0592102-03605-134400847923954.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: @∂gjhgaharh.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: OUI, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: fhehetEJ.
+    - Weight: 6 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: CONSULTATION, Motif: CONSULTATION - ACCIDENT.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Accident.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: NON.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: NON, 
+      Provider: Not Provided.
+    - Living Conditions: NON.
+    - Owner Information: 
+      - Location: Lugrin, France, Postal Code: 74500.
+      - Title: Dr.
+      - Owner ID: 4-2-060159297512-7243655-15584-023816870473275.
+      - Date of Record Creation: 2023-01-06 00:00:00.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: rzjrs.
+    
+#################################################################
+
+
+    Patient ID: 4-2-054853909007-9049502-15788-255304678146016.
+    
+    This is a summary of the medical record for a CT 
+    named EUROPEEN. 
+    The patient is a M and is currently 7 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-054853909007-9049502-15788-255304678146016
+    - Owner Link ID (lien_ID_P): 4-2-060159297512-7243655-15584-023816870473275
+    - Medical Conception ID: 4-2-087758978322-1541354-08539-219418481151520.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: Not Provided.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: OUI, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: Not Provided.
+    - Weight: 6 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: ORDONNANCE, Motif: ORDONNANCE.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Not Provided.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: NON, 
+      Provider: Not Provided.
+    - Living Conditions: NON.
+    - Owner Information: 
+      - Location: Lugrin, France, Postal Code: 74500.
+      - Title: Dr.
+      - Owner ID: 4-2-060159297512-7243655-15584-023816870473275.
+      - Date of Record Creation: 2023-01-06 00:00:00.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: Not Provided.
+    
+#################################################################
+
+
+    Patient ID: 4-2-054853909007-9049502-15788-255304678146016.
+    
+    This is a summary of the medical record for a CT 
+    named EUROPEEN. 
+    The patient is a M and is currently 7 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-054853909007-9049502-15788-255304678146016
+    - Owner Link ID (lien_ID_P): 4-2-060159297512-7243655-15584-023816870473275
+    - Medical Conception ID: 4-2-042685663985-8524944-10127-140976441777433.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: Not Provided.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: OUI, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: Not Provided.
+    - Weight: 6 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: ORDONNANCE, Motif: ORDONNANCE.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Not Provided.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: NON, 
+      Provider: Not Provided.
+    - Living Conditions: NON.
+    - Owner Information: 
+      - Location: Lugrin, France, Postal Code: 74500.
+      - Title: Dr.
+      - Owner ID: 4-2-060159297512-7243655-15584-023816870473275.
+      - Date of Record Creation: 2023-01-06 00:00:00.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: Not Provided.
+    
+#################################################################
+
+
+    Patient ID: 4-2-054853909007-9049502-15788-255304678146016.
+    
+    This is a summary of the medical record for a CT 
+    named EUROPEEN. 
+    The patient is a M and is currently 7 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-054853909007-9049502-15788-255304678146016
+    - Owner Link ID (lien_ID_P): 4-2-060159297512-7243655-15584-023816870473275
+    - Medical Conception ID: 4-2-075095218094-6960286-02840-193788099592443.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: Not Provided.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: OUI, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: Not Provided.
+    - Weight: 6 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: REPORT, Motif: REPORT CONSULTATION  - ACCIDENT.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Accident.
+    - Consultation Title: Not Provided.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: NON, 
+      Provider: Not Provided.
+    - Living Conditions: NON.
+    - Owner Information: 
+      - Location: Lugrin, France, Postal Code: 74500.
+      - Title: Dr.
+      - Owner ID: 4-2-060159297512-7243655-15584-023816870473275.
+      - Date of Record Creation: 2023-01-06 00:00:00.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: Not Provided.
+    
+#################################################################
+
+
+    Patient ID: 4-2-054853909007-9049502-15788-255304678146016.
+    
+    This is a summary of the medical record for a CT 
+    named EUROPEEN. 
+    The patient is a M and is currently 7 years old.
+
+    Internal Links and Identifiers:
+    - Animal Link ID (lien_ID_PA): 4-2-054853909007-9049502-15788-255304678146016
+    - Owner Link ID (lien_ID_P): 4-2-060159297512-7243655-15584-023816870473275
+    - Medical Conception ID: 4-2-112952837943-9425963-08083-074688258165674.
+    
+    The patient was examined on 2023-01-06 00:00:00.
+    The reason for the consultation was: Not Provided.
+    
+    Here's a brief history of the patient's health:
+    - Anamnesis: xsfh.
+    - Differential Diagnosis: Not Provided.
+    - Chronic Diseases: Not Provided.
+    - Sterilization status: OUI, 
+      Date of Sterilization: Not Provided.
+    
+    During the clinical examination, the following findings were noted:
+    - Clinical Examination: dh.
+    - Weight: 6 kg.
+    
+    Medical Interventions and Reports:
+    - Type of Medical Intervention: CONSULTATION, Motif: CONSULTATION - OTITE.
+    - Nature of Intervention: Not Provided.
+    - Surgical Title: Not Provided.
+    - Consultation Title: Otite.
+    - Anesthetic Report: Not Provided.
+    - Operative Report: Not Provided.
+    - Perioperative Care: Not Provided.
+    - Post-operative Care: Not Provided.
+    - Complications: Not Provided.
+    - Prognosis: Not Provided.
+    - Post-operative Recommendations: Not Provided.
+    - Report Comments: Not Provided.
+    - Follow-up Examination Needed: Not Provided.
+    
+    Treatment and Prescription Information:
+    - Treatment: No treatment provided.
+    - Prescription: No prescription provided.
+    
+    Additional information:
+    - Insurance: NON, 
+      Provider: Not Provided.
+    - Living Conditions: NON.
+    - Owner Information: 
+      - Location: Lugrin, France, Postal Code: 74500.
+      - Title: Dr.
+      - Owner ID: 4-2-060159297512-7243655-15584-023816870473275.
+      - Date of Record Creation: 2023-01-06 00:00:00.
+    
+    Clinic Information:
+    - Clinic: VetChablais, located in 
+      Bex, Not Provided.
+    - Clinic Postal Code: 1880.
+    
+    Summary Recommendations: dxg.
+    
+#################################################################
