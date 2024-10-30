@@ -42,7 +42,7 @@ if st.button("Show/Hide File Content"):
     st.session_state.show_content = not st.session_state.show_content
 
 # Display content if toggled on
-if uploaded_file and st.session_state.show_content:
+if uploaded_file:
     if uploaded_file.type == "application/pdf":
         pdf_reader = PdfReader(uploaded_file)
         text = "".join([page.extract_text() for page in pdf_reader.pages])
