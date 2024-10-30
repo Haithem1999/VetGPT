@@ -98,7 +98,7 @@ def generate_response(prompt):
     You will conduct the communication in the French language mainly but if the user prefers English, you will switch to English.
     """
 
-    user_prompt = f"{prompt}, Here is the medical document content to reference: {st.session_state.current_context}"
+    user_prompt = prompt.format(st.session_state.current_context)
     response = client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
