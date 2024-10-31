@@ -5,6 +5,7 @@ from openai import OpenAI
 import uuid 
 import json
 from PyPDF2 import PdfReader
+from docx import Document
     
 
 # Set up the OpenAI API key
