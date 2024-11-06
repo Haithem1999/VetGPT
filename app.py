@@ -28,9 +28,6 @@ client = OpenAI(api_key=api_key)
 st.title("Veterinarian Chatbot")
 st.write("Welcome to the Veterinarian Chatbot. How can I assist you with your pet's health today?")
 
-#MainMenu {
-  visibility: hidden;
-}
 
 # Store uploaded documents in session state
 if 'documents' not in st.session_state:
